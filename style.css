@@ -1,1 +1,251 @@
-qualquer coisa
+body{
+    font-family: 'Roboto', sans-serif;
+    width:100%;
+    height: 100%;
+    background-color: #E5E5E5;
+}
+.all-content {
+    width:100%;
+    height:100%;
+}
+
+.nav{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    /*height: 53px;*/
+    background-color: white;
+    width:100%;
+    position:fixed;
+    top:0px;
+    left:0px;
+    box-sizing: border-box;
+    box-shadow: 0px 0px 5px 0px rgb(0,0,0,0.4);
+    padding:20px;
+    z-index: 1;
+    
+}
+
+.nav img{
+    height: 53px;
+    width:auto;
+    
+}
+.nav ion-icon{
+    font-size:30px;
+    color:#000000;
+}
+
+footer{
+    padding:27px 18px;
+    box-sizing: border-box;
+    width:100%;
+    background-color: white;
+    color:#000000;
+    position:fixed;
+    bottom:0px;
+    left:0px;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0px 0px 5px 0px rgb(0,0,0,0.4);
+    
+}
+
+footer input{
+    font-size:18px;
+    font-weight: 400;
+    border:0px;
+    color:black;
+}
+
+footer input::placeholder{
+    opacity:0.85;
+}
+
+footer input, footer  select,footer textarea{
+    color: black;
+    border:0px;
+}
+
+footer  textarea:focus,footer input:focus {
+    opacity:1;
+    border:0px;
+    outline: none;
+}
+
+footer ion-icon{
+    font-size:26px;
+}
+
+/*display enter*/
+.enter{
+    width:100%;
+    height: 100%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position:fixed;
+    z-index: 1;
+    justify-content: flex-start;
+}
+
+.enter img{
+    margin-top:72px;
+    width:130px;
+}
+
+.enter div{
+    margin:auto auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.enter input{
+    color:#AEAEAE;
+    border:1px solid #D7D7D7;
+    padding:10px 20px;
+    border-radius: 4px;
+    text-align: center;
+}
+
+
+.enter button{
+    border-radius: 9px;
+    background-color: #E7E7E7;
+    width:109px;
+    height:45px;
+    color:#696969;
+    margin-top:15px;
+    border:0px solid white;
+}
+
+
+
+
+/* ul content with msgs*/
+.msgs{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-top:120px;
+    font-size: 14px;
+}
+
+.bate-papo{
+    width:100%; 
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0px 8px;
+    margin:4px 0px;
+    border-radius: 2px;
+    padding:10px;
+}
+
+.time{
+    color:#AAAAAA;
+}
+
+.username{
+    font-weight: 700;
+}
+
+
+
+
+/*tre tipos de mensagens*/
+
+.status{
+    background-color: #DCDCDC;
+}
+
+.msg4all{
+    background-color: white;
+}
+
+.msgDirect{
+    background-color: #FFDEDE;
+}
+
+.display-none{
+    display:none;
+}
+
+
+
+
+
+/*side menu */
+.menu{
+    position:fixed;
+    right: 0px;
+    top:0px;
+    width: 259px;
+    height: 100%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content:flex-start ;
+    box-shadow: 0px 0px 7px 1px rgb(0,0,0,0.4);
+    z-index: 2;
+}
+.menu > p{
+    width:70%;
+    display: flex;
+    align-items: center;
+    height: 84px;
+    
+    text-align: center;
+    font-size: 16px;
+    font-weight: 700;
+}
+.menu ul{
+    width:100%;
+}
+
+.menu-item{
+    box-sizing: border-box;
+    width:100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding:18px 18px 18px 18px;
+}
+.menu-item div:first-child{
+    justify-content: flex-start;
+}
+
+.menu-item div:first-child ion-icon{
+    font-size: 20px;
+    padding-right: 8px;
+}
+
+.menu-item .check{
+    color:#28BB25;
+    font-size: 15px;
+}
+
+
+.blackbackground{
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    opacity: 0.5;
+    position: fixed;
+    top:0px;
+    left:0px;
+    z-index: 1;
+}
+
+
+
+/*general css*/
+.display-flex{
+    display:flex;
+    align-items: center;
+}

@@ -1,14 +1,135 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Project5-batepapouol</title>
     <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="style.css">
+
+
+    <!--Roboto font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
 </head>
+
 <body>
+
+    <!--enter display-->
+    <div class="enter display-none">
+        <img src="./img/logo" alt="">
+        <div>
+            <input placeholder="Digite seu nome" type="text">
+            <button>Entrar</button>
+        </div>
+
+    </div>
+
+    <div class="all-content ">
+        <div class="nav display-none">
+            <img src="./img/logo" alt="">
+            <ion-icon name="people"></ion-icon>
+        </div>
+
+        <!--side menu-->
+        <div class="blackbackground">
+        </div>
+        <!--black background opacity-->
+        <div class="menu">
+            <p>Escolha um contato para enviar a mensagem:</p>
+            <ul class="contato">
+                <li>
+                    <div class="menu-item">
+                        <div class="display-flex">
+                            <ion-icon name="people"></ion-icon>
+                            <p>Todos</p>
+                        </div>
+                        <div class="check">
+                            <ion-icon name="checkmark"></ion-icon>
+                        </div>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="menu-item">
+                        <div class="display-flex">
+                            <ion-icon name="person-circle"></ion-icon>
+                            <p>João</p>
+                        </div>
+                    <div class="check">
+                        <ion-icon name="checkmark"></ion-icon>
+                    </div>
+        </li>
+        </ul>
+
+        <p>Escolha a visibilidade:</p>
+        <ul class="contato">
+            <li>
+                <div class="menu-item">
+                    <div class="display-flex">
+                        <ion-icon name="lock-open"></ion-icon>
+                        <p>Público</p>
+                    </div>
+                    <div class="check">
+                        <ion-icon name="checkmark"></ion-icon>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="menu-item">
+                    <div class="display-flex">
+                        <ion-icon name="lock-closed"></ion-icon>
+                        <p>Privado</p>
+                    </div>
+                    <div class="check">
+                        <ion-icon name="checkmark"></ion-icon>
+                    </div>
+                </div>
+            </li>
+        </ul>
+
+    </div>
+
+
+    <!--content with msgs-->
+    <ul class="msgs display-none">
+        <li>
+            <!--criando tres tipos de styles pras mensagens-->
+            <div class="status bate-papo">
+                <p><span class="time">(09:21:45)</span>
+                    <span class="username">João</span>
+                    <span class="msg">entra na sala...</span>
+                </p>
+            </div>
+            <div class="msg4all bate-papo">
+                <p><span class="time">(09:21:45)</span>
+                    <span class="username">João</span>
+                    <span class="msg">entra na sala...</span>
+                </p>
+            </div>
+            <div class="msgDirect bate-papo">
+                <p><span class="time">(09:21:45)</span>
+                    <span class="username">João</span>
+                    <span class="msg">entra na sala...</span>
+                </p>
+            </div>
+        </li>
+    </ul>
+
+    <footer>
+        <input placeholder="Escreva aqui">
+        <ion-icon name="paper-plane-outline"></ion-icon>
+    </footer>
+    </div>
+
     <script src="script.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
+
 </html>
