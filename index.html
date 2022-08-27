@@ -31,105 +31,137 @@
     </div>
 
     <div class="all-content ">
-        <div class="nav display-none">
+        <div class="nav ">
             <img src="./img/logo" alt="">
-            <ion-icon name="people"></ion-icon>
+            <ion-icon name="people" onclick ="toggleMenu()"></ion-icon>
         </div>
 
         <!--side menu-->
-        <div class="blackbackground">
+        <div class="blackbackground display-none" onclick="toggleMenu()">
         </div>
+        
         <!--black background opacity-->
-        <div class="menu">
-            <p>Escolha um contato para enviar a mensagem:</p>
-            <ul class="contato">
-                <li>
-                    <div class="menu-item">
-                        <div class="display-flex">
-                            <ion-icon name="people"></ion-icon>
-                            <p>Todos</p>
+        <div class="esconder display-none"> <!--esconde sidebar-->
+            <div class="menu">
+                <p>Escolha um contato para enviar a mensagem:</p>
+                <ul class="contato">
+                    <li>
+                        <div class="menu-item">
+                            <div class="display-flex">
+                                <ion-icon name="people"></ion-icon>
+                                <p>Todos</p>
+                            </div>
+                            <div class="check">
+                                <ion-icon name="checkmark"></ion-icon>
+                            </div>
                         </div>
+                    </li>
+
+                    <li>
+                        <div class="menu-item">
+                            <div class="display-flex">
+                                <ion-icon name="person-circle"></ion-icon>
+                                <p>João</p>
+                            </div>
                         <div class="check">
                             <ion-icon name="checkmark"></ion-icon>
                         </div>
-                    </div>
-                </li>
+                    </li>
+                </ul>
+            
 
-                <li>
-                    <div class="menu-item">
-                        <div class="display-flex">
-                            <ion-icon name="person-circle"></ion-icon>
-                            <p>João</p>
+                <p>Escolha a visibilidade:</p>
+                <ul class="visibilidade">
+                    
+<!--                     <li>
+                        <div class="menu-item" onclick="select_item_menu(this)">
+                            <div class="display-flex">
+                                <ion-icon name="lock-open"></ion-icon>
+                                <p>Público</p>
+                            </div>
+                            <div>
+                                <ion-icon name="checkmark" class="check-icon"></ion-icon>
+                            </div>
                         </div>
-                    <div class="check">
-                        <ion-icon name="checkmark"></ion-icon>
-                    </div>
-        </li>
-        </ul>
+                    </li>
 
-        <p>Escolha a visibilidade:</p>
-        <ul class="contato">
-            <li>
-                <div class="menu-item">
-                    <div class="display-flex">
-                        <ion-icon name="lock-open"></ion-icon>
-                        <p>Público</p>
-                    </div>
-                    <div class="check">
-                        <ion-icon name="checkmark"></ion-icon>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="menu-item">
-                    <div class="display-flex">
-                        <ion-icon name="lock-closed"></ion-icon>
-                        <p>Privado</p>
-                    </div>
-                    <div class="check">
-                        <ion-icon name="checkmark"></ion-icon>
-                    </div>
-                </div>
-            </li>
-        </ul>
+                                        
+                    <li>
+                        <div class="menu-item" onclick="select_item_menu(this)">
+                            <div class="display-flex">
+                                <ion-icon name="lock-closed"></ion-icon>
+                                <p>Privado</p>
+                            </div>
+                            <div>
+                                <ion-icon name="checkmark" class="check-icon"></ion-icon>
+                            </div>
+                        </div>
+                    </li> -->
+
+                </ul>
+            </div>
+        </div>
 
     </div>
 
 
     <!--content with msgs-->
-    <ul class="msgs display-none">
-        <li>
-            <!--criando tres tipos de styles pras mensagens-->
+    <ul class="msgs ">
+        <!--criando tres tipos de styles pras mensagens-->
+<!--         <li>
             <div class="status bate-papo">
                 <p><span class="time">(09:21:45)</span>
                     <span class="username">João</span>
                     <span class="msg">entra na sala...</span>
                 </p>
             </div>
-            <div class="msg4all bate-papo">
+        </li> -->
+
+        <!--message-->
+<!--         <li>
+            <div class="message bate-papo">
                 <p><span class="time">(09:21:45)</span>
                     <span class="username">João</span>
                     <span class="msg">entra na sala...</span>
                 </p>
             </div>
-            <div class="msgDirect bate-papo">
+        </li> -->
+
+        <!--private-->
+<!--         <li>
+            <div class="private_message bate-papo">
                 <p><span class="time">(09:21:45)</span>
                     <span class="username">João</span>
                     <span class="msg">entra na sala...</span>
                 </p>
             </div>
-        </li>
+        </li> -->
+
     </ul>
+    <div class="fim"></div>
 
     <footer>
-        <input placeholder="Escreva aqui">
-        <ion-icon name="paper-plane-outline"></ion-icon>
+        <div>
+            <input placeholder="Escreva aqui">
+            <p class="frase_msg_reservada display-none"> Enviado para <span class="to-input-name"></span> (reservadamente)</p>
+        </div>
+        <ion-icon name="paper-plane-outline" onclick ="sendMessage()"></ion-icon>
     </footer>
     </div>
 
-    <script src="script.js"></script>
+
+
+
+    
+    <!--ion-icon-->
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    
+    <!--axios-->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    
+    <!--script do site-->
+	<script src="script.js"></script>
 </body>
 
 </html>
