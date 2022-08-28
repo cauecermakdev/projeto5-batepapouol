@@ -27,6 +27,9 @@ function toggleMenu(){
 
     const seletor_blackback = document.querySelector(".blackbackground");
     seletor_blackback.classList.toggle("display-none");
+
+    const seletorMenu = document.querySelector(".menu");
+    seletorMenu.classList.toggle("clicked");
 }
 
 
