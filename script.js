@@ -97,12 +97,14 @@ function sendMessage(){
     }*///caso de ser msg privada
     
     console.log(objMsg);
-    objMsg = {
+    /*objMsg = {
         from: username.name,
-        to:"Todos",
+        //to:"Todos",
         text: text_input_seletor.value,
-        type:"message"//dps 
-    }  
+        //type:"message"//dps 
+    }  */
+    objMsg.from = username.name;
+    objMsg.text = text_input_seletor.value;
     console.log(objMsg);
 
     const requisicao = axios.post("https://mock-api.driven.com.br/api/v6/uol/messages",objMsg);
@@ -146,7 +148,7 @@ function insertElements(msg_type, msgClass){
     //msg_type: status or msg4all or msgDirect
     console.log(msg_type);
 
-    const seletor_msg = document.querySelector(msgClass);
+    const seletor_msg = document.querySelector(msgClassse);
 
     seletor_msg.innerHTML +=
     `
@@ -235,7 +237,7 @@ function buscaMensagensServidor(objeto) {
 }
 
 buscaMensagensServidor();
-//setInterval(buscaMensagensServidor,3000);
+setInterval(buscaMensagensServidor,3000);
 
 
 //avisa servidor que usuario esta online
@@ -307,8 +309,10 @@ function select_item_menu(elemento){
         if(visibilidade == "Público"){
             console.log("publico");
             objMsg.type = "message";
+            console.log(objMsg);
         }else{
             objMsg.type = "private_message";
+            console.log(objMsg);
             console.log("privado");
         }
         
@@ -420,4 +424,4 @@ function contatos_menu(){
 
 contatos_menu();
 
-//setInterval(contatos_menu,10000);
+setInterval(contatos_menu,10000);
