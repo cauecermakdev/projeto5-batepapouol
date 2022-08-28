@@ -5,6 +5,8 @@ let objMsg = {
     type:"message"//dps 
 }  
 
+let logado = false;
+
 /* //seleciona menu-items
 function selectMenuItems(elemento){
     elemento.classList.toggle("display-none");
@@ -44,12 +46,17 @@ const username = {
 function tratarSucesso(resposta) {
     //console.log(resposta);
     if (resposta.status == 200) {
+        buscaMensagensServidor();
          //colocar display-none na div ".enter"
-        document.querySelector(".enter").classList.add("display-none");
+         document.querySelector(".enter").classList.add("display-none");
         //console.log("Foi inserido Username com sucesso!");
         
+        //dps que deu certo login
+        logado = true;
+        
+        setInterval(buscaMensagensServidor,3000);
+
         //coloca msgs no html
-        buscaMensagensServidor();
     }
 }
 
@@ -58,6 +65,7 @@ function tratarError(error) {
     //alert(error.response.status);
 
     if (error.response.status == 400) {
+        logado = false;
         alert("usuário já existe, insira um nome de usuário diferente!");    
         document.querySelector(".enter input").value = "";
     }
@@ -109,7 +117,7 @@ function sendMessage(){
     /*objMsg = {
         from: username.name,
         //to:"Todos",
-        text: text_textarea_seletor.value,
+        text: text_textarea_if(logado){seletor.value,
         //type:"message"//dps 
     }  */
     objMsg.from = username.name;
@@ -140,10 +148,7 @@ setInterval(usuarioOnline,5000);
         to: "Todos",
         text: "entra na sala...",
         type: "status",
-        time: "08:01:17"
-    },
-    {
-        from: "João",
+        time: "08:01:17buscaMensagensServidor();
         to: "Todos",
         text: "Bom dia",
         type: "message",
@@ -245,9 +250,11 @@ function buscaMensagensServidor(objeto) {
     requisicao.catch(deuRuim);//preciso tratar caso não dê certo
 }
 
-//buscaMensagensServidor();
-setInterval(buscaMensagensServidor,3000);
 
+//if(logado){
+/*     buscaMensagensServidor();
+    setInterval(buscaMensagensServidor,3000); */
+//}
 
 //avisa servidor que usuario esta online
 //setInterval(usuarioOnline,5000);
