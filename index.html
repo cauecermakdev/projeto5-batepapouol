@@ -21,11 +21,11 @@
 <body>
 
     <!--enter display-->
-    <div class="enter display-none">
+    <div class="enter">
         <img src="./img/logo" alt="">
         <div>
             <input placeholder="Digite seu nome" type="text">
-            <button>Entrar</button>
+            <button onclick="enterUserName()">Entrar</button>
         </div>
 
     </div>
@@ -142,18 +142,15 @@
 
     <footer>
         <div>
-            <input placeholder="Escreva aqui" rows="20" cols="2">
-            <!--<textarea placeholder="Escreva aqui" rows="3" cols="100%"></textarea>-->
-            <p class="frase_msg_reservada display-none"> Enviado para <span class="to-input-name"></span> (reservadamente)</p>
+            <!--<input placeholder="Escreva aqui" rows="20" cols="2">-->
+            <textarea placeholder="Escreva aqui" rows="1" cols="25" ></textarea>
+            <p class="frase_msg_reservada display-none"> Enviado para <span class="to-textarea-name"></span> (reservadamente)</p>
         </div>
         <ion-icon name="paper-plane-outline" onclick ="sendMessage()"></ion-icon>
     </footer>
     </div>
 
 
-
-
-    
     <!--ion-icon-->
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>

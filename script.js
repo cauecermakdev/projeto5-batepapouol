@@ -11,7 +11,7 @@ function selectMenuItems(elemento){
 } */
 
 function reset(){
-    document.querySelector("footer input").value = "";
+    document.querySelector("footer textarea").value = "";
     document.querySelector(".msgs").innerHTML = "";
     document.querySelector(".contato").innerHTML="";
 }
@@ -43,7 +43,9 @@ const username = {
 
 function tratarSucesso(resposta) {
     //console.log(resposta);
-    if (resposta.status === 200) {
+    if (resposta.status == 200) {
+         //colocar display-none na div ".enter"
+        document.querySelector(".enter").classList.add("display-none");
         //console.log("Foi inserido Username com sucesso!");
     }
 }
@@ -52,21 +54,25 @@ function tratarError(error) {
     //alert("deu ruim!");
     //alert(error.response.status);
 
-    if (error.response.status === 400) {
-        enterUserName();
+    if (error.response.status == 400) {
+        alert("usuário já existe, insira um nome de usuário diferente!");    
+        document.querySelector(".enter input").value = "";
     }
 }
 
 
 function enterUserName() {
-    username.name = prompt("Digite seu nome:");
+    //username.name = prompt("Digite seu nome:");
+    username.name = document.querySelector(".enter input").value;
+
+    //faz post com objeto com nome
     const requisicao = axios.post('https://mock-api.driven.com.br/api/v6/uol/participants', username);
 
     requisicao.then(tratarSucesso);
     requisicao.catch(tratarError);
 }
 
-enterUserName();
+//enterUserName();
 
 function usuarioOnline() {
     const requisicao = axios.post('https://mock-api.driven.com.br/api/v6/uol/status', username);
@@ -86,9 +92,9 @@ function sendMessage(){
         type: "message" // ou "private_message" para o bônus
     }*/
 
-    //input value
-    const text_input_seletor = document.querySelector("footer input");
-    console.log(text_input_seletor.value);
+    //textarea value
+    const text_textarea_seletor = document.querySelector("footer textarea");
+    console.log(text_textarea_seletor.value);
     //Será usado para colocar no menu sidebar
     //const contatoSelecionado = document.querySelector(".contato .check");
     //const visibilidadeSelecionada = document.querySelector(".visibilidade .check");
@@ -100,11 +106,11 @@ function sendMessage(){
     /*objMsg = {
         from: username.name,
         //to:"Todos",
-        text: text_input_seletor.value,
+        text: text_textarea_seletor.value,
         //type:"message"//dps 
     }  */
     objMsg.from = username.name;
-    objMsg.text = text_input_seletor.value;
+    objMsg.text = text_textarea_seletor.value;
     console.log(objMsg);
 
     const requisicao = axios.post("https://mock-api.driven.com.br/api/v6/uol/messages",objMsg);
@@ -113,8 +119,8 @@ function sendMessage(){
     requisicao.then(buscaMensagensServidor());
     //requisicao.catch(window.location.reload());
     
-    //dps que enviar a msg apaga ela do input
-    text_input_seletor.value = "";
+    //dps que enviar a msg apaga ela do textarea
+    text_textarea_seletor.value = "";
 }
 
 
@@ -257,23 +263,30 @@ document.addEventListener('keydown', function (event) {
 /*********************************************** */
 /*MENU FUNCTIONS*/
 
-function colocaFraseInput(nome){
+function colocaFrasetextarea(nome){
     /*
     if(`${nome}` != "Todos"){
 
     }*/
 
     //se selecionar para mandar alguem de selecionar todos e depois selecionar todos vai dar problema
-    //sempre que selecionar todos preciso retirar a frase do input
-    //o problema é que se a frase nao estiver no input e eu selecionar todos logo de cara, vou adicionar mais um display-none
-    //quando selecionar Todos preciso verificar se já tem display none na frase do input, senão tiver eu adiciono
+    //sempre que selecionar todos preciso retirar a frase do textarea
+    //o problema é que se a frase nao estiver no textarea e eu selecionar todos logo de cara, vou adicionar mais um display-none
+    //quando selecionar Todos preciso verificar se já tem display none na frase do textarea, senão tiver eu adiciono
 
     //coloca a frase
     document.querySelector(".frase_msg_reservada").classList.remove("display-none");
 
-    //colocando nome no input
-    document.querySelector(".to-input-name").innerHTML = `${nome}`;
+    //colocando nome no textarea
+    document.querySelector(".to-textarea-name").innerHTML = `${nome}`;
     
+}
+
+function retiroFrasetextarea(){
+    const seletor_reservada = document.querySelector("footer p");
+    if(!seletor_reservada.classList.contains("display-none")){
+        seletor_reservada.classList.add("display-none");
+    }
 }
 
 //seleciona item
@@ -300,7 +313,11 @@ function select_item_menu(elemento){
         const nome = elemento.children[0].children[1].innerHTML;
         objMsg.to = nome;
         
-        colocaFraseInput(nome);
+        if(objMsg.to != "Todos"){
+            colocaFrasetextarea(nome);
+        }else{
+            retiroFrasetextarea();
+        }
        
     }
 
@@ -310,7 +327,7 @@ function select_item_menu(elemento){
             console.log("publico");
             objMsg.type = "message";
             console.log(objMsg);
-        }else{
+        }else if(objMsg.to != "Todos"){
             objMsg.type = "private_message";
             console.log(objMsg);
             console.log("privado");
@@ -318,8 +335,6 @@ function select_item_menu(elemento){
         
     }
 
-
-    //3. se selecionada visibilidade mudo a visibilidade da msg
 
 }
 

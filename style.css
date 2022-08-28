@@ -50,30 +50,38 @@ footer{
     justify-content: space-between;
     align-items: center;
     box-shadow: 0px 0px 5px 0px rgb(0,0,0,0.4);
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+         box-sizing: border-box;
     
 }
 
-footer input{
+footer textarea{
     font-size:18px;
     font-weight: 400;
     border:0px;
     color:black;
-}
-
-footer input::placeholder{
-    opacity:0.85;
+    resize: none;
+    
     
 }
 
-footer input, footer  select,footer textarea{
+footer textarea::placeholder{
+    opacity:0.85;
+    font-family: 'Roboto', sans-serif;
+    font-style: italic;
+    
+}
+
+footer textarea, footer  select,footer textarea{
     color: black;
     border:0px;
     margin-left: -3px;
     /*background-color: red;*/
-    width:100%;
+    
 }
 
-footer textarea:focus,footer input:focus {
+footer textarea:focus,footer textarea:focus {
     opacity:1;
     border:0px;
     outline: none;
@@ -93,7 +101,7 @@ footer ion-icon{
     font-weight: 300;
 }
 
-.to-input-name{
+.to-textarea-name{
     margin:0px 5px;
 }
 
@@ -113,7 +121,7 @@ footer ion-icon{
     flex-direction: column;
     align-items: center;
     position:fixed;
-    z-index: 1;
+    z-index: 100;
     justify-content: flex-start;
 }
 
@@ -136,8 +144,19 @@ footer ion-icon{
     padding:10px 20px;
     border-radius: 4px;
     text-align: center;
+    font-size:18px;
 }
 
+.enter input:placeholder{
+    color:#AEAEAE;
+    font-weight: 400;
+}
+
+.enter input:focus{
+    color:#262626;
+    font-weight: 600;
+    outline: none;
+}
 
 .enter button{
     border-radius: 9px;
@@ -229,10 +248,10 @@ footer ion-icon{
     display: flex;  
     align-items: center;
     height: 84px;
-    
     text-align: center;
     font-size: 16px;
     font-weight: 700;
+    padding:20px 0px;
 }
 .menu ul{
     width:100%;
