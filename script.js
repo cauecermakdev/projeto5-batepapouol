@@ -53,9 +53,9 @@ function tratarSucesso(resposta) {
         
         //dps que deu certo login
         logado = true;
-        
-        setInterval(buscaMensagensServidor,3000);
-
+        if(logado){
+            setInterval(buscaMensagensServidor,3000);
+        }
         //coloca msgs no html
     }
 }
