@@ -13,7 +13,7 @@ function selectMenuItems(elemento){
 function reset(){
     document.querySelector("footer textarea").value = "";
     document.querySelector(".msgs").innerHTML = "";
-    document.querySelector(".contato").innerHTML="";
+    document.querySelector(".participant").innerHTML="";
 }
 
 reset();
@@ -47,6 +47,9 @@ function tratarSucesso(resposta) {
          //colocar display-none na div ".enter"
         document.querySelector(".enter").classList.add("display-none");
         //console.log("Foi inserido Username com sucesso!");
+        
+        //coloca msgs no html
+        buscaMensagensServidor();
     }
 }
 
@@ -96,8 +99,8 @@ function sendMessage(){
     const text_textarea_seletor = document.querySelector("footer textarea");
     console.log(text_textarea_seletor.value);
     //Será usado para colocar no menu sidebar
-    //const contatoSelecionado = document.querySelector(".contato .check");
-    //const visibilidadeSelecionada = document.querySelector(".visibilidade .check");
+    //const participantSelecionado = document.querySelector(".participant .check");
+    //const visibilitySelecionada = document.querySelector(".visibility .check");
 
     /*if(to_ !== "" || to_ != "Todos"){
     }*///caso de ser msg privada
@@ -242,7 +245,7 @@ function buscaMensagensServidor(objeto) {
     requisicao.catch(deuRuim);//preciso tratar caso não dê certo
 }
 
-buscaMensagensServidor();
+//buscaMensagensServidor();
 setInterval(buscaMensagensServidor,3000);
 
 
@@ -292,7 +295,7 @@ function retiroFrasetextarea(){
 //seleciona item
 function select_item_menu(elemento){
     
-    //1. mostra check do item selecionado no contato e na visibilidade
+    //1. mostra check do item selecionado no participant e na visibility
 
     const classePai = elemento.parentElement.parentElement.className;
     const selected = document.querySelector(`.${classePai} .select`);
@@ -308,8 +311,8 @@ function select_item_menu(elemento){
 
     //2. de acordo com o item selecionado mudo o to do objMsg
 
-    if(classePai == "contato"){
-        console.log("entra contato");
+    if(classePai == "participant"){
+        console.log("entra participant");
         const nome = elemento.children[0].children[1].innerHTML;
         objMsg.to = nome;
         
@@ -318,12 +321,11 @@ function select_item_menu(elemento){
         }else{
             retiroFrasetextarea();
         }
-       
     }
 
-    if(classePai == "visibilidade"){
-        const visibilidade = elemento.children[0].children[1].innerHTML;
-        if(visibilidade == "Público"){
+    if(classePai == "visibility"){
+        const visibility = elemento.children[0].children[1].innerHTML;
+        if(visibility == "Público"){
             console.log("publico");
             objMsg.type = "message";
             console.log(objMsg);
@@ -331,16 +333,13 @@ function select_item_menu(elemento){
             objMsg.type = "private_message";
             console.log(objMsg);
             console.log("privado");
-        }
-        
+        }   
     }
-
-
 }
 
 function insertVisibilityMenu(){
-    const sel_visibilidade = document.querySelector(".visibilidade");
-    sel_visibilidade.innerHTML = `
+    const sel_visibility = document.querySelector(".visibility");
+    sel_visibility.innerHTML = `
     
         <li>
             <div class="menu-item" onclick="select_item_menu(this)">
@@ -369,7 +368,7 @@ function insertVisibilityMenu(){
     `
 }
 
-function select_item_menu_contatos(elemento){
+function select_item_menu_participants(elemento){
 
     const selected = document.querySelector(".select");
     
@@ -383,9 +382,9 @@ function select_item_menu_contatos(elemento){
 }
 
 function insertHTMLMenu(participante){
-    const seletor_contato = document.querySelector(".contato");
+    const seletor_participant = document.querySelector(".participant");
 
-    seletor_contato.innerHTML +=
+    seletor_participant.innerHTML +=
     `
     <li>
         <div class="menu-item" onclick="select_item_menu(this)">
@@ -403,9 +402,9 @@ function insertHTMLMenu(participante){
 }
 
 
-function insertMenuContatos(participantes){
+function insertMenuparticipants(participantes){
     //adiciona li com todos
-    document.querySelector(".contato").innerHTML=
+    document.querySelector(".participant").innerHTML=
     `
     <li>
         <div class="menu-item" onclick="select_item_menu(this)">
@@ -429,14 +428,14 @@ function insertMenuContatos(participantes){
 
 
 
-/* colocando lista de contatos no menu lateral*/
-function contatos_menu(){
-    //reseta contatos anteriores
+/* colocando lista de participants no menu lateral*/
+function participants_menu(){
+    //reseta participants anteriores
     const requisicaoParticipantes = axios.get("https://mock-api.driven.com.br/api/v6/uol/participants"); 
-    requisicaoParticipantes.then(insertMenuContatos);
+    requisicaoParticipantes.then(insertMenuparticipants);
 
 }
 
-contatos_menu();
+participants_menu();
 
-setInterval(contatos_menu,10000);
+setInterval(participants_menu,10000);
