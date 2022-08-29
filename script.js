@@ -54,7 +54,8 @@ function tratarSucesso(resposta) {
         //dps que deu certo login
         logado = true;
         if(logado){
-            //buscaMensagensServidor();
+            participants_menu();
+            buscaMensagensServidor();
             setInterval(buscaMensagensServidor,3000);
             setInterval(usuarioOnline,5000);
             // participants_menu();
@@ -65,9 +66,9 @@ function tratarSucesso(resposta) {
 }
 
 function tratarErrorNome(error) {
-//    console.log("Deu catch na funcao enterUserName");
+//   console.log("Deu catch na funcao enterUserName");
     if (error.response.status == 400) {
-        logado = false;
+        //logado = false;
         alert("usuário já existe, insira um nome de usuário diferente!");    
         document.querySelector(".enter input").value = "";
     }
@@ -102,13 +103,13 @@ function sendMessage(){
 
     //textarea value
     const text_textarea_seletor = document.querySelector("footer textarea");
-    console.log(text_textarea_seletor.value);
+    //console.log(text_textarea_seletor.value);
 
     //console.log(objMsg);
 
     objMsg.from = username.name;
     objMsg.text = text_textarea_seletor.value;
-    console.log(objMsg);
+    //console.log(objMsg);
 
     const requisicao = axios.post("https://mock-api.driven.com.br/api/v6/uol/messages",objMsg);
 
@@ -117,55 +118,12 @@ function sendMessage(){
     
     //requisicao.catch(console.log("Deu catch na funcao send message"));
     //Caso o servidor responda com erro, significa que esse usuário não está mais na sala e a página deve ser atualizada
-    requisicao.catch(window.location.reload());
+    requisicao.catch(function(){window.location.reload()});
     
     //dps que enviar a msg apaga ela do textarea
     text_textarea_seletor.value = "";
 }
 
-
-
-//requisito de mandar nome do usuario a cada 5 segundos para saber que ele esta online
-//setInterval(usuarioOnline,5000);
-
-
-/* OBJETO DE RESPOSTA DAS MENSAGENS DO SERVIDOR
-
-[
-    {
-        from: "João",
-        to: "Todos",
-        text: "entra na sala...",
-        type: "status",
-        time: "08:01:17buscaMensagensServidor();
-        to: "Todos",
-        text: "Bom dia",
-        type: "message",
-        time: "08:02:50"
-    },
-]
-*/
-
-//insere <li> com a mensagem especifica no <ul> do html
-/*function insertElements(msg_type, msgClass){
-    //msg_type: status or msg4all or msgDirect
-    console.log(msg_type);
-
-    const seletor_msg = document.querySelector(msgClassse);
-
-    seletor_msg.innerHTML +=
-    `
-    <li>
-        <div class="${msg_type} bate-papo">
-        <p><span class="time">${time}</span>
-            <span class="username">${from}</span>
-            <span class="msg">${text}</span>
-        </p>
-        </div>
-    </li>
-    `
-
-}*/
 
 function insereMensagem(objetoMsg) {
 
@@ -194,22 +152,7 @@ function insereMensagem(objetoMsg) {
     `
     //}
 
-    //.msgs in html is ul and have all msgs  inside
-    //insertElements(type,".msgs");
 
-    /*
-    //qual o tipo da mensagem? 
-    //colocar mensagem na ul
-    if (type === "status") {//tipo entra e sai
-
-        insertElements("status",".msgs");
-
-    } else if (type === "message") {
-
-    } else {
-
-    }
-    */
 }
 
 
@@ -237,20 +180,11 @@ function deuRuim(erro){
 function buscaMensagensServidor(objeto) {
     const requisicao = axios.get('https://mock-api.driven.com.br/api/v6/uol/messages');
     //console.log(typeof(requisicao));
-    console.log("buscaMsg");
+    //console.log("buscaMsg");
     requisicao.then(colocaMsgHTML);//colocar essa mensagem no meu html
-    console.log("Deu catch na funcao buscaMensagensServidor");
+    //console.log("Deu catch na funcao buscaMensagensServidor");
     //requisicao.catch(deuRuim);//preciso tratar caso não dê certo
 }
-
-
-//if(logado){
-/*     buscaMensagensServidor();
-    setInterval(buscaMensagensServidor,3000); */
-//}
-
-//avisa servidor que usuario esta online
-//setInterval(usuarioOnline,5000);
 
 
 //posso ter uma funcao get(funcao,link) e uma funcao post(funcao,link)
@@ -267,10 +201,6 @@ document.addEventListener('keydown', function (event) {
 /*MENU FUNCTIONS*/
 
 function colocaFrasetextarea(nome){
-    /*
-    if(`${nome}` != "Todos"){
-
-    }*/
 
     //se selecionar para mandar alguem de selecionar todos e depois selecionar todos vai dar problema
     //sempre que selecionar todos preciso retirar a frase do textarea
@@ -312,7 +242,7 @@ function select_item_menu(elemento){
     //2. de acordo com o item selecionado mudo o to do objMsg
 
     if(classePai == "participant"){
-        console.log("entra participant");
+        //console.log("entra participant");
         const nome = elemento.children[0].children[1].innerHTML;
         objMsg.to = nome;
         
@@ -326,13 +256,13 @@ function select_item_menu(elemento){
     if(classePai == "visibility"){
         const visibility = elemento.children[0].children[1].innerHTML;
         if(visibility == "Público"){
-            console.log("publico");
+            //console.log("publico");
             objMsg.type = "message";
-            console.log(objMsg);
+            //console.log(objMsg);
         }else if(objMsg.to != "Todos"){
             objMsg.type = "private_message";
-            console.log(objMsg);
-            console.log("privado");
+            //console.log(objMsg);
+            //console.log("privado");
         }   
     }
 }
