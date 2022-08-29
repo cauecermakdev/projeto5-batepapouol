@@ -7,10 +7,6 @@ let objMsg = {
 
 let logado = false;
 
-/* //seleciona menu-items
-function selectMenuItems(elemento){
-    elemento.classList.toggle("display-none");
-} */
 
 function reset(){
     document.querySelector("footer textarea").value = "";
@@ -49,24 +45,27 @@ const username = {
 function tratarSucesso(resposta) {
     //console.log(resposta);
     if (resposta.status == 200) {
-        buscaMensagensServidor();
+        
+        
          //colocar display-none na div ".enter"
-         document.querySelector(".enter").classList.add("display-none");
+        document.querySelector(".enter").classList.add("display-none");
         //console.log("Foi inserido Username com sucesso!");
         
         //dps que deu certo login
         logado = true;
         if(logado){
+            //buscaMensagensServidor();
             setInterval(buscaMensagensServidor,3000);
+            setInterval(usuarioOnline,5000);
+            // participants_menu();
+            setInterval(participants_menu,10000);
         }
         //coloca msgs no html
     }
 }
 
-function tratarError(error) {
-    //alert("deu ruim!");
-    //alert(error.response.status);
-
+function tratarErrorNome(error) {
+//    console.log("Deu catch na funcao enterUserName");
     if (error.response.status == 400) {
         logado = false;
         alert("usuário já existe, insira um nome de usuário diferente!");    
@@ -83,46 +82,30 @@ function enterUserName() {
     const requisicao = axios.post('https://mock-api.driven.com.br/api/v6/uol/participants', username);
 
     requisicao.then(tratarSucesso);
-    requisicao.catch(tratarError);
+    requisicao.catch(tratarErrorNome);
 }
 
 //enterUserName();
+function usuarioOff(){
+    logado=false;
+}
 
 function usuarioOnline() {
+    
     const requisicao = axios.post('https://mock-api.driven.com.br/api/v6/uol/status', username);
-    //requisicao.then(console.log(requisicao));
-    //requisicao.then(tratarSucesso);
-    //requisicao.catch(tratarError);
+    //requisicao.catch(console.log("Deu catch na funcao UsuarioOnline"));
 }
 
 
 //envia mensagem 
 function sendMessage(){
-    //objeto a ser enviado
-    /*{
-        from: "nome do usuário",
-        to: "nome do destinatário (Todos se não for um específico)",
-        text: "mensagem digitada",
-        type: "message" // ou "private_message" para o bônus
-    }*/
 
     //textarea value
     const text_textarea_seletor = document.querySelector("footer textarea");
     console.log(text_textarea_seletor.value);
-    //Será usado para colocar no menu sidebar
-    //const participantSelecionado = document.querySelector(".participant .check");
-    //const visibilitySelecionada = document.querySelector(".visibility .check");
 
-    /*if(to_ !== "" || to_ != "Todos"){
-    }*///caso de ser msg privada
-    
-    console.log(objMsg);
-    /*objMsg = {
-        from: username.name,
-        //to:"Todos",
-        text: text_textarea_if(logado){seletor.value,
-        //type:"message"//dps 
-    }  */
+    //console.log(objMsg);
+
     objMsg.from = username.name;
     objMsg.text = text_textarea_seletor.value;
     console.log(objMsg);
@@ -131,7 +114,10 @@ function sendMessage(){
 
     //requisicao.then(alert("deuBom"));
     requisicao.then(buscaMensagensServidor());
-    //requisicao.catch(window.location.reload());
+    
+    //requisicao.catch(console.log("Deu catch na funcao send message"));
+    //Caso o servidor responda com erro, significa que esse usuário não está mais na sala e a página deve ser atualizada
+    requisicao.catch(window.location.reload());
     
     //dps que enviar a msg apaga ela do textarea
     text_textarea_seletor.value = "";
@@ -140,7 +126,7 @@ function sendMessage(){
 
 
 //requisito de mandar nome do usuario a cada 5 segundos para saber que ele esta online
-setInterval(usuarioOnline,5000);
+//setInterval(usuarioOnline,5000);
 
 
 /* OBJETO DE RESPOSTA DAS MENSAGENS DO SERVIDOR
@@ -161,7 +147,7 @@ setInterval(usuarioOnline,5000);
 */
 
 //insere <li> com a mensagem especifica no <ul> do html
-function insertElements(msg_type, msgClass){
+/*function insertElements(msg_type, msgClass){
     //msg_type: status or msg4all or msgDirect
     console.log(msg_type);
 
@@ -179,7 +165,7 @@ function insertElements(msg_type, msgClass){
     </li>
     `
 
-}
+}*/
 
 function insereMensagem(objetoMsg) {
 
@@ -190,7 +176,9 @@ function insereMensagem(objetoMsg) {
     const time = objetoMsg.time;
     //console.log(type);
 
-   //if(from == username.name){
+   //if(type == "private_message" && to != username.name){
+
+    //}else{
     const seletor_msg = document.querySelector(".msgs");
 
     seletor_msg.innerHTML +=
@@ -231,7 +219,8 @@ function colocaMsgHTML(requisicao) {
     //zera msgs
     document.querySelector(".msgs").innerHTML = "";
 
-    console.log(requisicao.data);
+    //imprimindo array com objetos que foram buscados no servidor
+    //console.log(requisicao.data);
 
     const array_msgs = requisicao.data;
     array_msgs.forEach(insereMensagem);
@@ -240,17 +229,18 @@ function colocaMsgHTML(requisicao) {
 }
 
 function deuRuim(erro){
-    //alert("Erro na requisição de mensagens");
-    console.log(erro);
+    alert("Erro na requisição de mensagens");
+    //console.log(erro);
 }
 
 /*buscando msg no servidor*/
 function buscaMensagensServidor(objeto) {
     const requisicao = axios.get('https://mock-api.driven.com.br/api/v6/uol/messages');
-    console.log(typeof(requisicao));
+    //console.log(typeof(requisicao));
     console.log("buscaMsg");
     requisicao.then(colocaMsgHTML);//colocar essa mensagem no meu html
-    requisicao.catch(deuRuim);//preciso tratar caso não dê certo
+    console.log("Deu catch na funcao buscaMensagensServidor");
+    //requisicao.catch(deuRuim);//preciso tratar caso não dê certo
 }
 
 
@@ -436,16 +426,14 @@ function insertMenuparticipants(participantes){
 }
 
 
-
-
 /* colocando lista de participants no menu lateral*/
 function participants_menu(){
     //reseta participants anteriores
     const requisicaoParticipantes = axios.get("https://mock-api.driven.com.br/api/v6/uol/participants"); 
     requisicaoParticipantes.then(insertMenuparticipants);
-
+    //requisicaoParticipantes.catch(console.log("Deu catch na funcao q coloca participants menu"))
 }
 
-participants_menu();
-
-setInterval(participants_menu,10000);
+//colocando participantes no menu lateral
+//participants_menu();
+//setInterval(participants_menu,10000);

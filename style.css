@@ -169,7 +169,9 @@ footer ion-icon{
     border:0px solid white;
 }
 
-
+li{
+    overflow:hidden;
+}
 
 
 /* ul content with msgs*/
@@ -303,10 +305,12 @@ footer ion-icon{
 }
 
 
-
 /*general css*/
 .display-flex{
     display:flex;
     align-items: center;
 }
 
+@media(max-width:600px){
+
+}
